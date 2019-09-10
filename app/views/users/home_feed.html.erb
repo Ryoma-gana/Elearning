@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card mb-3">
+      <div class="card-body text-center">
+        <%= gravatar_for current_user %>
+
+        <h1><%= current_user.name %></h1>
+        <%= current_user.email %>
+
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <h4>Following2</h4>
+                <span><%= current_user.following.count %></span>
+            </div>
+            <div class="col-lg-6">
+                <h4>Followers</h4>
+                <span><%= current_user.followers.count %></span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
