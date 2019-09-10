@@ -5,5 +5,22 @@ Rails.application.routes.draw do
 
   get '/signup', to: 'users#new'
 
+  get '/login' ,to: 'sessions#new'
+
+  resources :users, except: :new do
+    member do
+      get :following, :followers
+    end
+  end
+
   resources :users
+  resources :sessions, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
+
+  #admin用のcontrollerとview
+  namespace :admin do
+    resources :categories
+    resources :users
+  end
+
 end
