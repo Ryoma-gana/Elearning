@@ -1,29 +1,31 @@
-<h1 class="text-center p-4 mb-3">Users</h1>
+<div class="main-container">
+    <h1 class="text-center p-4 mb-3 display-4">Users</h1>
 
-<div class="text-center">
-    <%= will_paginate %>
-</div>
-<div class="row">
-    <% @users.each do |user| %>
-        <div class="col-lg-6">
-            <div class="media mb-3">
-                <div class="align-self-center mr-3 border">
+    <div class="row">
+        <% @users.each do |user| %>
+            <div class="col-lg-6 text-center">
+                <figure class="figure">
                     <%= gravatar_for user %>
-                </div>
-                <div class="media-body">
-                    <h4><%= link_to user.name, user %></h4>
+                    <figcaption class="figure-caption">
+                        <h4><%= link_to user.name, user %></h4>
+                    </figcaption>
+                    <figcaption class="figure-caption mb-5">
                     <% if user.id==current_user.id %>　　　　<%#user==current_usrでもいい %>
                         <%= link_to "Edit #{user.name}", edit_user_path(user),
-                                                    class: "btn btn-info btn-sm" %>
+                                                    class: "btn btn-info btn-sm mr-5" %>
                     <% end %>
                     <% if current_user.admin? && current_user != user %>
                         <%= link_to "Delete #{user.name}", user,method: :delete,
                                                     class: "btn btn-danger btn-sm" %>
                     <% end %>
-                    <%#<%= link_to "Delete #{user.name}", user,method: :delete,
-                                                    class: "btn btn-danger btn-sm" %> 
-                </div>
+                    </figcaption>
+                </figure>
+                    
+            
             </div>
-        </div>
-    <% end %>
+        <% end %>
+    </div>
+    <div class="pagination justify-content-center">
+        <%= will_paginate %>
+    </div>
 </div>
