@@ -26,5 +26,14 @@ body #static{
      background-size: cover;
      background-position: center center;
      background-repeat: no-repeat;
-     position: fixed;
+    //  position: fixed;
+ }
+
+ footer{
+    position: static;
+
+ }
+
+ .main-container{
+   background-color: papayawhip;
  }
