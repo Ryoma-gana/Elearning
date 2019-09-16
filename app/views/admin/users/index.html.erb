@@ -18,7 +18,7 @@
                                         class: "mb-1 btn btn-info btn-sm" %>
                 <% end %>
                 <% if current_user.admin? && current_user != user %>
-                    <%= link_to "Delete #{user.name}", user_path(user),method: :delete,
+                    <%= link_to "Delete #{user.name}", admin_user_path(user),method: :delete,
                                         class: "mb-1 btn btn-danger btn-sm" %>
                         <br />
                     <% if user.admin? %>
