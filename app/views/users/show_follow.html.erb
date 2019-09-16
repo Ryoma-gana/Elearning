@@ -2,7 +2,11 @@
   <div class="col-md-4">
     <div class="card mb-3">
       <div class="card-body text-center">
-        <%= gravatar_for @user %>
+        <% if current_user.image? %>
+          <%= image_tag current_user.image.url, class: 'mw-100' %>
+        <% else %>
+          <%= gravatar_for current_user %>
+        <% end %> 
 
         <h1>OPA<%= @user.name %></h1>
         <%= @user.email %>
@@ -31,7 +35,11 @@
       <div class="card-body">
         <% @users.each do |user| %>
           <div class="media mt-2">
-            <%= gravatar_for user, size: 60 %>
+            <% if user.image? %>
+              <%= image_tag user.image.url, size: 60 %>
+            <% else %>
+              <%= gravatar_for user, size: 60 %>
+            <% end %> 
             <div class="media-body ml-2">
               <%= user.name %>
             </div>

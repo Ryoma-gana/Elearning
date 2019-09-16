@@ -34,7 +34,16 @@ class User < ApplicationRecord
     def feed
         following_ids = "SELECT followed_id FROM relationships 
                        WHERE follower_id = :user_id"
-        # Micropost.where("user_id IN (#{following_ids}) 
-        #                  OR user_id = :user_id", user_id: id)
+    end
+
+
+    #Model Validations
+    mount_uploader :image, ImageUploader
+    validate :picture_size
+
+    private
+    #Custom validation
+    def picture_size
+        error.add(:image, "should be less than 5MB") if image.size > 5.megabytes
     end
 end

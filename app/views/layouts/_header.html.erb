@@ -6,16 +6,18 @@
 
       <% if logged_in? %>
         <%= link_to "Lesson", about_path,class:"nav-item nav-link" %>
-        <%= link_to "Users", users_path,class:"nav-item nav-link" %>
-        <%= link_to current_user.name, root_path, class:"nav-item nav-link" %>
+        <% unless current_user.admin? %>
+          <%= link_to "Users", users_path,class:"nav-item nav-link" %>
+        <% end %>
+        <%= link_to current_user.name, current_user, class:"nav-item nav-link" %>
         <%= link_to "Logout", session_path(current_user), 
                               method: :delete, class:"nav-item nav-link" %>
-
       <% else %>
         <%= link_to "About", about_path,class:"nav-item nav-link" %>
-        <%= link_to "SingUp", signup_path,class:"nav-item nav-link" %>
+        <%= link_to "SignUp", signup_path,class:"nav-item nav-link" %>
         <%= link_to "LogIn", login_path,class:"nav-item nav-link" %>
       <% end %>
+      
     </div>
   </div>
 </nav>
