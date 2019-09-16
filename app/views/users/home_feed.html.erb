@@ -1,24 +1,44 @@
-<div class="main-container">
-    <div class="mx-auto" style="width:600px;">
-        <div class="card mb-3">
-        <div class="card-body text-center">
-            <%= gravatar_for current_user %>
+    <div class="row justify-content-around" >
+        <div class="card mb-3" style="width:480px;">
+            <div class="card-body text-center">
+                <% if current_user.image? %>
+                    <%= image_tag current_user.image.url, class: 'mw-100' %>
+                <% else %>
+                    <%= gravatar_for current_user %>
+                <% end %> 
 
-            <h1><%= current_user.name %></h1>
-            <%= current_user.email %>
+                <h1><%= current_user.name %></h1>
+                <%= current_user.email %>
 
-            <hr />
-            <div class="row">
-                <div class="col-lg-6">
-                    <h4>Following</h4>
-                    <span><%= current_user.following.count %></span>
-                </div>
-                <div class="col-lg-6">
-                    <h4>Followers</h4>
-                    <span><%= current_user.followers.count %></span>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h4>Following</h4>
+                        <span><%= current_user.following.count %></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <h4>Followers</h4>
+                        <span><%= current_user.followers.count %></span>
+                    </div>
                 </div>
             </div>
         </div>
+       
+        <div class="col-lg-4">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <% if current_user.admin? %>
+            <%= link_to "Users", admin_users_path, class: 'btn btn-primary btn-lg btn-block' %>
+            <button type="button" class="btn btn-primary btn-lg btn-block">Create</button>
+        <% else %>
+            <button type="button" class="btn btn-primary btn-lg btn-block">Start</button>
+        <% end %>
         </div>
     </div>
-  </div>
+</div>
+

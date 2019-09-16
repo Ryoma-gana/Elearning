@@ -1,26 +1,32 @@
 <div class="main-container">
+
+    <h1>Profile</h1>
     <div class="mx-auto" style="width:500px;">
         <div class="card mb-3">
-        <div class="card-body text-center">
-            <%= gravatar_for @user %>
+            <div class="card-body text-center">
+                <% if @user.image? %>
+                    <%= image_tag @user.image.url, class: 'mw-100' %>
+                <% else %>
+                    <%= gravatar_for @user %>
+                <% end %> 
 
-            <h1><%= @user.name %></h1>
-            <%= @user.email %>
-            <hr />
-            <%= render 'follow_form' %>
+                <h1><%= @user.name %></h1>
+                <%= @user.email %>
+                <hr />
+                <%= render 'follow_form' %>
 
-            <hr />
-            <div class="row">
-                <div class="col-lg-6">
-                    <h4>Following5</h4>
-                    <span><%= link_to @user.following.count, following_user_path(@user) %></span>
-                </div>
-                <div class="col-lg-6">
-                    <h4>Followers</h4>
-                    <span><%= link_to @user.followers.count, followers_user_path(@user) %></span>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h4>Following5</h4>
+                        <span><%= link_to @user.following.count, following_user_path(@user) %></span>
+                    </div>
+                    <div class="col-lg-6">
+                        <h4>Followers</h4>
+                        <span><%= link_to @user.followers.count, followers_user_path(@user) %></span>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </div>

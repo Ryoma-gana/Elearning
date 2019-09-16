@@ -19,8 +19,13 @@ Rails.application.routes.draw do
 
   #admin用のcontrollerとview
   namespace :admin do
+    resources :users, only: [:index, :update]
     resources :categories
-    resources :users
+  end
+
+  resources :categories do
+    resources :words
+    resources :choises
   end
 
 end

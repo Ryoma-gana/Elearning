@@ -1,0 +1,39 @@
+<h1 class="text-center p-4 mb-3">Users</h1>
+<div class="row">
+    <% @users.each do |user| %>
+        <div class="col-lg-6 text-center">
+            <figure class="figure">
+                <% if user.image? %>
+                    <%= image_tag user.image.url, class: 'w-50' %>
+                <% else %>
+                    <%= gravatar_for user %>    
+                <% end %> 
+            </figure>
+            <figcaption class="figure-caption">
+                <h4><%= link_to user.name, user %></h4>
+            </figcaption>
+            <figcaption class="figure-caption mb-5">
+                <% if user.id==current_user.id %>　　　　<%#user==current_userでもいい %>
+                    <%= link_to "Edit #{user.name}", edit_user_path(user),
+                                        class: "mb-1 btn btn-info btn-sm" %>
+                <% end %>
+                <% if current_user.admin? && current_user != user %>
+                    <%= link_to "Delete #{user.name}", user_path(user),method: :delete,
+                                        class: "mb-1 btn btn-danger btn-sm" %>
+                        <br />
+                    <% if user.admin? %>
+                        <%= link_to "Remove #{user.name} from admin", admin_user_path(user),method: :patch,
+                                        class: "mb-1 btn btn-warning btn-sm" %>
+                    <br />
+                    <% else %>
+                        <%= link_to "Add #{user.name} to admin", admin_user_path(user),method: :patch,
+                                        class: "mb-1 btn btn-warning btn-sm" %>
+                        <br />
+                    <% end %>
+                <% end %>
+        <%#<%= link_to "Delete #{user.name}", user,method: :delete,
+                                        class: "btn btn-danger btn-sm" %> 
+            </figcaption>
+        </div>
+    <% end %>
+</div>
