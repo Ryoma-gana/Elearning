@@ -34,9 +34,9 @@
         <br>
         <% if current_user.admin? %>
             <%= link_to "Users", admin_users_path, class: 'btn btn-primary btn-lg btn-block' %>
-            <button type="button" class="btn btn-primary btn-lg btn-block">Create</button>
+            <%= link_to "Categories", categories_path, class: 'btn btn-primary btn-lg btn-block' %>
         <% else %>
-            <button type="button" class="btn btn-primary btn-lg btn-block">Start</button>
+            <%= link_to "Start", categories_path, class: 'btn btn-primary btn-lg btn-block' %>
         <% end %>
         </div>
     </div>

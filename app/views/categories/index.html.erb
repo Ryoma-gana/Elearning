@@ -1,0 +1,32 @@
+<div class="mx-auto" style="width:1000px;">
+    <table class="table">
+        <% if current_user.admin? %>
+            <caption><%= link_to "Create New Lesson", new_admin_category_path, class: 'mb-1 btn btn-info btn-sm' %></caption>
+        <% end %>
+        <div class="text-center">
+        <%= will_paginate @categories %>
+        </div>
+        <thead>
+            <tr>
+                <th scope="col">Lesson</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <% @categories.each do |category| %> 
+        <tbody>
+            <tr>
+                <td><%= link_to category.title, admin_category_words_path(category) %></td>
+                <td><%= category.description %></td>
+                <td><%= link_to "Start", "#",class: 'mb-1 btn btn-info btn-sm' %></td>
+                <% if current_user.admin? %>
+                    <td><%= link_to "Add", new_admin_category_word_path(category), class: 'mb-1 btn btn-primary btn-sm' %>
+                        <%= link_to "Delete", admin_category_path(category), method: :delete,
+                                        class: 'mb-1 btn btn-danger btn-sm' %></td>
+                <% end %>
+            </tr>
+
+        </tbody>
+        <% end %>
+
+    </table>
+</div>

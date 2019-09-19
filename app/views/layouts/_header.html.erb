@@ -5,7 +5,7 @@
       <%= link_to "Home", root_path,class:"nav-item nav-link" %>
 
       <% if logged_in? %>
-        <%= link_to "Lesson", about_path,class:"nav-item nav-link" %>
+        <%= link_to "Lesson", categories_path,class:"nav-item nav-link" %>
         <% unless current_user.admin? %>
           <%= link_to "Users", users_path,class:"nav-item nav-link" %>
         <% end %>
