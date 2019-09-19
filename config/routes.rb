@@ -16,16 +16,21 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :categories
 
   #admin用のcontrollerとview
   namespace :admin do
     resources :users, only: [:index, :update, :destroy]
-    resources :categories
+    resources :categories do
+      resources :words do
+        resources :choices
+      end
+    end
   end
 
   resources :categories do
     resources :words
-    resources :choises
+    resources :choices
   end
 
 end

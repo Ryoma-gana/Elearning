@@ -1,0 +1,25 @@
+<h1 class="text-center">Word Page</h1>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        
+        <hr />
+        <%= form_for [:admin,@category,@word] do |f| %>
+            <%= render "shared/error_messages", object: f.object %>
+
+            <div class="form-group">
+                <%= f.label :content %>
+                <%= f.text_field :content, class: "form-control" %>
+            </div>
+            <%= f.fields_for :choices do |i| %>
+            <div class="form-group">
+                <%= i.label :content, "Choice" %>
+                <%= i.text_field :content, class: "form-control" %>
+                <%= i.check_box :correct %>
+            </div>
+            <% end %>
+            
+            <%= f.submit "Create", class: "btn btn-primary btn-block" %>
+        <% end %>
+    </div>
+</div>
+            

@@ -1,0 +1,42 @@
+<div class="mx-auto" style="width:1000px;">
+    <table class="table">
+        <% if current_user.admin? %>
+            <caption>
+                <%= link_to "Add new word", new_admin_category_word_path, class: 'btn btn-info' %>
+                <%= link_to "Back", categories_path, class: 'btn btn-dark' %>
+            </caption>
+        <% end %>
+        <div class="text-center">
+            <%= will_paginate @words %>
+        </div>
+        <thead>
+            <tr>
+                <th scope="col">WORD</th>
+                <th scope="col">ANSWER</th>
+                <% if current_user.admin? %>
+                <th scope="col">ACTION</th>
+                <% else %>
+                <th scope="col">RESULT</th>
+                <% end %>
+            </tr>
+        </thead>
+        <% @words.each do |word| %> 
+        <tbody>
+            <tr>
+                <td><%= word.content %></td>
+                <td><%= word.choices.find_by(correct: true).content %></td>
+
+                <% if current_user.admin? %>
+                <td><%= link_to "Edit", edit_admin_category_word_path(@category,word), class: 'mb-1 btn btn-primary btn-sm' %>
+                    <%= link_to "Delete", admin_category_word_path(@category,word), method: :delete, class: 'mb-1 btn btn-danger btn-sm' %>
+                </td>
+                <% else %>
+                <td>result</td>
+                <% end %>
+            </tr>
+        </tbody>
+        <% end %>
+
+    </table>
+
+</div>
