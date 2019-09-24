@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :categories
 
+  resources :lessons, only: [:create, :show] do 
+    resources :answers
+  end
+
   #admin用のcontrollerとview
   namespace :admin do
     resources :users, only: [:index, :update, :destroy]

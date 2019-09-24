@@ -1,0 +1,36 @@
+<div class="mx-auto" style="width:1000px;">
+    <table class="table">
+        <caption>
+            <h3 class="text-danger">Result: <%= @lesson.lesson_results %> of <%= @category.words.count  %></h3>
+        </caption>
+
+        
+        <thead>
+            <tr>
+                <th scope="col">Word</th>
+                <th scope="col">Correct Answer</th>
+                <th scope="col">Answer</th>
+                <th></th>
+            </tr>
+        </thead>
+        <% @lesson.answers.each do |answer| %> 
+        <tbody>
+            <tr>
+                <td><%= answer.word.content %></td>
+                <td><%= answer.word.correct_choice.content %></td>
+                <td><%= answer.choice.content %></td>
+                <td>
+                    <% if answer.choice.correct == true %>
+                        <i class="far fa-circle"></i>
+                    <% else %>
+                        <i class="fas fa-times"></i>                                
+                    <% end %>    
+                </td>
+            </tr>
+
+        </tbody>
+        <% end %>
+
+    </table>
+    <%= link_to "Back", categories_path, class: 'btn btn-dark' %>
+</div>
