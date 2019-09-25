@@ -1,6 +1,6 @@
 module Admin
     class CategoriesController < ApplicationController
-
+        before_action :admin_check
         # def index
         #     @category=Category.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
         # end
@@ -31,6 +31,13 @@ module Admin
 
 
         private
+        def admin_check
+            unless current_user.admin?
+                flash[:danger]="User not authorized"
+                redirect_to(root_url)
+            end
+        end
+
         def category_params
             params.require(:category).permit(:title, :description)
         end

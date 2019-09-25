@@ -27,7 +27,7 @@ module Admin
         private
         def admin_check
             unless current_user.admin?
-                flash[:info]="You are not admin!"
+                flash[:info]="User not authorized"
                 redirect_to root_url
             end
         end

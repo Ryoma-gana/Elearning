@@ -1,6 +1,7 @@
 module Admin
     class WordsController < ApplicationController
-
+        before_action :admin_check
+        
         def new
             @category=Category.find(params[:category_id])
             @word = @category.words.build
@@ -52,8 +53,8 @@ module Admin
         end
 
         private
-        def admin_user
-            unless current_user_admin?
+        def admin_check
+            unless current_user.admin?
                 flash[:danger]="User not authorized"
                 redirect_to(root_url)
             end
