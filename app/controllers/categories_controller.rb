@@ -2,6 +2,10 @@ class CategoriesController < ApplicationController
 
     def index
         @categories=Category.order(created_at: :desc).paginate(page: params[:page], per_page: 6)
+        @lesson=Lesson.new
+        if @lesson.result?
+            update:is_complete==true
+        end
     end
 
     def new 
