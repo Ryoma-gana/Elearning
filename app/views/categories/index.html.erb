@@ -17,26 +17,28 @@
         <% @categories.each do |category| %>
             <tbody>
                 <tr>
-                    <td><%= link_to category.title, admin_category_words_path(category) %></td>
-                    <td><%= category.description %></td>
-                    
                     <% if current_user.admin? %>
+                        <td><%= link_to category.title, admin_category_words_path(category) %></td>
+                        <td><%= category.description %></td>
                         <td><%= link_to "Add", new_admin_category_word_path(category), class: 'mb-1 btn btn-info btn-sm' %>
                             <%= link_to "Delete", admin_category_path(category), method: :delete,
                                             class: 'mb-1 btn btn-danger btn-sm' %></td>
+                    <% else %>
+                        <td><%= category.title %></td>
+                        <td><%= category.description %></td>
                     <% end %>
 
                     <% if lesson_words(category).any? %>
-                        <%= form_for(@lesson) do |f| %>
-                            <td>
+                        <td>
+                            <%= form_for(@lesson) do |f| %>
                                 <% if is_complete(category).nil? %>
                                     <%= hidden_field_tag :category_id, category.id %>
                                     <%= f.submit "Learn", class: "btn btn-primary" %>
                                 <% else %>
                                     <%= link_to "Show result", lesson_path(is_complete(category)), class: 'mb-1 btn btn-info btn-sm' %>
                                 <% end %>
-                            </td>
-                        <% end %>
+                            <% end %>
+                        </td>
                     <% end %> 
                 </tr>
             </tbody>
