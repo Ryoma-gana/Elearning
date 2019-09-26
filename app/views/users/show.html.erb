@@ -28,3 +28,46 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="col-lg-9">
+    <div class="card">
+        <div class="card-body">
+            <% if @activities.any? %>
+                <% @activities.each do |activity|%>
+                    <% if activity.action_type == "Lesson" %>
+                        <div class="container mt-2">
+                            <div class="media">
+                                <div class="media-body align-self-center">
+                                    <%= link_to_if @user == current_user,"You", user_path(@user) do 
+                                                            link_to @user.name, user_path(@user) end %> learned 
+                                    <%= activity.action.lesson_results %> of 
+                                    <%= activity.action.words.size %> in 
+                                    <%= link_to activity.action.category.title, lesson_path(activity.action.id) %>
+                                    <div>
+                                        <small class="text-muted"><%= time_ago_in_words(activity.created_at) %></small>                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% elsif activity.action_type == "Relationship" %>
+                        <div class="container mt-2">
+                            <div class="media">
+                                <div class="media-body align-self-center">
+                                    <%= link_to activity.action.follower.name, user_path(@user) %>
+                                        followed <%= link_to activity.action.followed.name, user_path(relationship(activity.action.followed_id).id) %>
+                                    <div>
+                                        <small class="text-muted"><%= time_ago_in_words(activity.created_at) %></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>	
+                <% end %>
+            <% else %>
+                <h4 class="text-center text-muted"> Nothing to show</h4>
+            <% end %>
+        </div>
+    </div>
+</div>
