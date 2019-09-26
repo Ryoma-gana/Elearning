@@ -4,6 +4,7 @@ class AnswersController < ApplicationController
         
         if @lesson.first_word.nil?
             @lesson.update(result: @lesson.lesson_results)
+            @lesson.create_activity(user: current_user)
             redirect_to lesson_url(@lesson.id)
         else
             @answer=@lesson.answers.new

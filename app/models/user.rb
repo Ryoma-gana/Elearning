@@ -16,6 +16,9 @@ class User < ApplicationRecord
                                      dependent: :destroy
     has_many :followers, through: :passive_relationships, source: :follower
 
+
+    has_many :activities, dependent: :destroy
+    
     #Follows a user
     def follow(other_user)
         following << other_user      #他のユーザーを追加
@@ -23,7 +26,8 @@ class User < ApplicationRecord
 
     #Unfollows a user
     def unfollow(other_user)
-        following.delete(other_user)       #ユーザーを削除
+        # following.delete(other_user)       #ユーザーを削除
+        active_relationships.find_by(followed_id: other_user.id).destroy
     end
 
     #Returns true if the current user is following the other user

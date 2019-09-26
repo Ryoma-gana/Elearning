@@ -20,6 +20,7 @@ class UsersController < ApplicationController
 
     def show
         @user=User.find(params[:id])
+        @activities = @user.activities.order(created_at: :desc)
     end
 
     def edit
@@ -63,6 +64,7 @@ class UsersController < ApplicationController
         @users=@user.followers.paginate(page: params[:page], per_page: 10)
         render 'show_follow'
       end
+
 
     private
     def user_params
