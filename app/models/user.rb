@@ -18,6 +18,9 @@ class User < ApplicationRecord
 
 
     has_many :activities, dependent: :destroy
+    has_many :lessons, dependent: :destroy
+    has_many :categories, through: :lessons
+    has_many :answers, through: :lessons
     
     #Follows a user
     def follow(other_user)
@@ -38,6 +41,10 @@ class User < ApplicationRecord
     def feed
         following_ids = "SELECT followed_id FROM relationships 
                        WHERE follower_id = :user_id"
+    end
+
+    def words_learned
+        lessons.sum(:result)
     end
 
 
