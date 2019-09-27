@@ -5,5 +5,5 @@ class Relationship < ApplicationRecord
     validates :follower_id, presence: true
     validates :followed_id, presence: true
 
-    has_one :activity, as: :action, dependent: :destroy
+    has_many :activity, as: :action, dependent: :destroy
 end

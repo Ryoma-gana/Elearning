@@ -18,7 +18,7 @@ module Admin
             @word = @category.words.build(word_params)
         
             if @word.save
-            # redirect_to root_url         
+            # redirect_to root_url
             flash[:success]="Succesfully registered!"
             redirect_to admin_category_words_path
             else

@@ -7,7 +7,10 @@ Rails.application.routes.draw do
 
   get '/login' ,to: 'sessions#new'
 
+  
+
   resources :users, except: :new do
+    resources :words, only: :index
     member do
       get :following, :followers
     end
@@ -33,7 +36,7 @@ Rails.application.routes.draw do
   end
 
   resources :categories do
-    resources :words
+    # resources :words
     resources :choices
   end
 
